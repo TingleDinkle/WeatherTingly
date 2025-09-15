@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <!-------Header------------------------------->
+        <div class="header">
+            <!--Nút sáng tối-->
+            <button id="themeToggle" class="theme-toggle-btn">
+                <span class="icon"></span> Chuyển sang sáng/tối <!--icon-->
+            </button>
+            <!---------------->
+            <h2>Weather</h2>
+
+            <!----Ô nhập tên và nút----->
+            <div class="weather-input">
+                <input class="input-box" type="text" name="city" id="city_input" placeholder="Enter city name"><!--Nơi nhập địa điểm-->
+
+                <!---Nút tìm kiếm---->
+                <button class="search-button" type="button" id="searchBtn">
+                    <i class="fa-regular fa-search"></i> Search
+                </button>
+                <!--------------------->
+
+                <!---Nút xác định vị trí hiện tại ---->
+                <button type="button" id="locationBtn">
+                    <i class="fa-solid fa-location-crosshairs"></i> Current Location
+                </button>
+                <!----------------------------------->
+
+            </div>
+            <!------------------------->
+
+        </div>
+        <!--------------------------------------------->
+
+
+        <div class="weather-data">
+
+        <!----------Thông tin thời tiết bến trái----------------------------------------------------------------->
+            <div class="weather-left">
+                <!----------Thông tin thời tiết hiện tại---------------->
+                <div class="card">
+                    <div class="current-weather">
+                        <div class="details">
+                            <p>Now</p>
+                            <h2>___&deg;C</h2><!--Nhiệt độ + Biểu tượng "độ C"-->
+                            <p>_____</p><!--Mô tả thời tiết-->
+                        </div>
+                        <div class="weather-icon">
+                            <img src="https://openweathermap.org/img/wn/04d@2x.png" alt=""><!---Biểu tưởng thời tiết (ảnh từ OpenWeather)--->
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="card-footer">
+                        <p><i class="fa-solid fa-calendar-days"></i>____________</p><!--Ngày tháng hiện tại-->
+                        <p><i class="fa-solid fa-location-dot"></i>____________</p><!--Vị trí hiện tại-->
+                    </div>
+                </div>
+                <!-------------------------------------------------------------->
+                <!----------Thông tin thời tiết trong 5 ngày tới---------------->
+                <div class="card">
+                    <h2>5 days Forecast </h2>
+                    <div class="day-forecast">
+                        <!---Ngày 1--->
+                        <div class="forecast-item">
+                            <div class="icon-wrapper">
+                                <img src="https://openweathermap.org/img/wn/02d.png" alt=""><!--Biểu tưởng thời tiết (ảnh từ OpenWeather)-->
+                                <span>___&deg;C</span><!--Nhiệt độ + Biểu tượng "độ C"-->
+                            </div>
+                            <p>____</p><!--Ngày tháng-->
+                            <p>____</p><!--Thứ-->
+                        </div>
+                        <!---Ngày 2--->
+                        <div class="forecast-item">
+                            <div class="icon-wrapper">
+                                <img src="https://openweathermap.org/img/wn/02d.png">
+                                <span>___&deg;C</span>
+                            </div>
+                            <p>____</p>
+                            <p>____</p>
+                        </div>
+                        <!---Ngày 3--->
+                        <div class="forecast-item">
+                            <div class="icon-wrapper">
+                                <img src="https://openweathermap.org/img/wn/02d.png">
+                                <span>___&deg;C</span>
+                            </div>
+                            <p>____</p>
+                            <p>____</p>
+                        </div>
+                        <!---Ngày 4--->
+                        <div class="forecast-item">
+                            <div class="icon-wrapper">
+                                <img src="https://openweathermap.org/img/wn/02d.png">
+                                <span>___&deg;C</span>
+                            </div>
+                            <p>____</p>
+                            <p>____</p>
+                        </div>
+                        <!---Ngày 5--->
+                        <div class="forecast-item">
+                            <div class="icon-wrapper">
+                                <img src="https://openweathermap.org/img/wn/02d.png">
+                                <span>___&deg;C</span>
+                            </div>
+                            <p>____</p>
+                            <p>____</p>
+                        </div>
+                    </div>
+                </div>
+                <!-------------------------->
+            </div>
+        <!-------------------------------------------------------------------------------------------------------------------------------->
+        
+            <!-------Thông tin thời tiết hôm nay------->
+            <div class="weather-right">
+                <h2>Today's Highlights</h2>
+                <div class="highlights">
+                    <!---Chỉ số chất lượng không khí----->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Air Quality index</p>
+                            <p class="air-index aqi-1">Good</p>
+                        </div>
+                        <div class="air-indices">
+                            <i class="fa-regular fa-wind fa-3x"></i>
+                            <div class="item">
+                                <p>PM 2.5</p><!--Hạt bụi siêu mịn có đường kính ≤ 2.5 micromet-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>PM10</p><!--Hạt bụi có kích thước lớn hơn PM 2.5-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>SO2</p><!--Khí lưu huỳnh, thường phát thải từ nhà máy-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>CO</p><!--Khí cacbon mônôxít, gây nguy hiểm khi hít thở trong thời gian dài.-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>NO</p><!--Khí NO-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>NO2</p><!--Khí NO2-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>NH3</p><!--Khí NH3-->
+                                <h2>____</h2>
+                            </div>
+                            <div class="item">
+                                <p>O3</p><!--Khí O3-->
+                                <h2>____</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <!----------------------------->
+                    <!----Hiển thị thời gian mặt trời mọc và lặn-->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Sunrise & Sunset</p>
+                        </div>
+                        <div class="sunrise-sunset">
+                            <!---Mặt trời mọc-->
+                            <div class="item">
+                                <div class="icon">
+                                    <i class="fa-light fa-sunrise fa-4x"></i><!--Biểu tượng mặt trời mọc-->
+                                </div>
+                                <div>
+                                    <p>Sunrise</p>
+                                    <h2>____</h2><!---Hiển thị thời gian mọc-->
+                                </div>
+                            </div>
+                            <!----------------->
+                            <!---Mặt trời lặn-->
+                            <div class="item">
+                                <div class="icon">
+                                    <i class="fa-light fa-sunset fa-4x"></i><!--Biểu tượng mặt trời lặn-->
+                                </div>
+                                <div>
+                                    <p>Sunset</p>
+                                    <h2>____</h2><!---Hiển thị thời gian lặn-->
+                                </div>
+                            </div>
+                            <!----------------->
+                        </div>
+                    </div>
+                    <!---------------------------------------> 
+
+                    <!---Độ ẩm--->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Humidity</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa-light fa-droplet fa-2x"></i><!--Biểu tượng độ ẩm-->
+                            <h2 id="humidityVal">____%</h2>
+                        </div>
+                    </div>
+                    <!---------->
+
+                    <!---Áp suất--->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Pressure</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa-light fa-compass fa-2x"></i><!--Biểu tượng áp suất-->
+                            <h2 id="pressureVal">____hPa</h2>
+                        </div>
+                    </div>
+                    <!---------->
+
+                    <!---Tầm nhìn--->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Visibility</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa-light fa-eye fa-2x"></i><!--Biểu tượng tầm nhìn-->
+                            <h2 id="visibilityVal">____km</h2>
+                        </div>
+                    </div>
+                    <!---------->
+
+                    <!---Tốc độ gió--->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Wind Speed</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa-light fa-location-arrow fa-2x"></i><!--Biểu tượng tốc độ gió-->
+                            <h2 id="windSpeedVal">____m/s</h2>
+                        </div>
+                    </div>
+                    <!---------->
+
+                    <!---Cảm giác--->
+                    <div class="card">
+                        <div class="card-head">
+                            <p>Feels like</p>
+                        </div>
+                        <div class="card-item">
+                            <i class="fa-light fa-temperature-list fa-2x"></i><!--Biểu tượng nhiệt kế-->
+                            <h2 id="feelsVal">____&deg;C</h2>
+                        </div>
+                    </div>
+                    <!---------->
+                </div>
+                <!-------Hiển thị thời tiết trong ngày theo giờ---------->
+                <h2>Today at</h2>
+                <div class="hourly-forecast">
+                    <div class="card">
+                        <p>9 AM</p><!--Giờ cụ thể-->
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt=""><!--Biểu tượng thời tiết-->
+                        <p>___&deg;C</p><!--Nhiệt độ-->
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                    <div class="card">
+                        <p>9 AM</p>
+                        <img src="https://openweathermap.org/img/wn/04d.png" alt="">
+                        <p>___&deg;C</p>
+                    </div>
+                </div>
+                <!--------------------------------->
+            </div>
+            <!------------------------->
+        </div>
+    </div>
+    <!--Kết nói javascript-->
+    <script src="./script.js"></script>
+    <script src="https://momentjs.com/downloads/moment.min.js"></script><!--Thư viện xử lý thời gian-->
+    <!---------------------->
+</body>
+</html>

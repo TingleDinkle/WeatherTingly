@@ -1,0 +1,475 @@
+
+/*-------Thiết lập chung------*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Đảm bảo padding và border không ảnh hưởng đến kích thước phần tử */
+}
+body{
+    min-height: 100vh;
+    background-color: var(--bg-color1); /* Màu nền chính */
+    color: #fff;/* Màu chữ mặc định */
+    font-family: sans-serif;/* Phông chũ */
+    padding: 0 15px;
+}
+hr{
+    margin-bottom: 10px; /* Khoảng cách dưới của đường kẻ */
+}
+/*---------------------------*/
+/*-------Header------*/
+.header{
+    position: sticky; /* Giữ vị trí cố định khi cuộn */
+    top: 0; /* Đặt ở đầu trang */
+    background-color: var(--bg-color1);
+    display: flex; /* Sắp xếp theo chiều ngang */
+    justify-content: space-between; /* Khoảng cách đều giữa các phần tử */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 10px; /* Khoảng cách dưới */
+    padding: 15px 0; /* Khoảng cách trên và dưới */
+
+    /* Ô nhập tên thành phố */
+    & #city_input {
+        background-color: var(--bg-color2);
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 25px;
+        color: #fff;
+        &:focus{
+            outline: none;
+        }
+    }
+
+    /* Nút tìm kiếm */
+    & #searchBtn{
+        border: none;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 25px;
+        background-color: #fff;
+        cursor: pointer; /* Hiển thị biểu tượng tay khi hover */
+    }
+
+    /* Nút xác định vị trí hiện tại */
+    & #locationBtn{
+        border: none;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 25px;
+        background-color: #ea6e4b;
+        cursor: pointer; /* Hiển thị biểu tượng tay khi hover */
+    }
+}
+/*-----------------------*/
+
+/*--------Card (Thẻ hiển thị thông tin)-------*/
+.card{
+    background-color: var(--bg-color2);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+
+    /* Văn bản phụ trong thẻ */
+    & p{
+        font-size: 14px;
+        color: #999;
+    }
+
+    /* Tiêu đề trong thẻ */
+    & h2{
+        font-size: 32px;
+        font-weight: 500; /* Độ đậm chữ vừa phải */
+    }
+}
+
+/*-----Thông tin thời tiết-----*/
+.weather-data{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Chia làm 4 cột đều nhau */
+    gap: 12px; /* Khoảng cách giữa các cột */
+
+    /*-----Thông tin thời tiết cột bên trái-----*/
+    & .weather-left{
+        grid-column: span 1; /* Chiếm 1 cột */
+
+        /* Phần thời tiết hiện tại */
+        & .current-weather{
+            display: flex; /* Sắp xếp theo chiều ngang */
+            justify-content: space-between; /* Khoảng cách giữa các phần tử */
+            align-items: center; /* Căn giữa theo chiều dọc */
+
+            & h2{
+                margin: 7px 0;
+            }
+
+            & p{
+                color: #fff ;
+            }
+        }
+
+        /* Footer của thẻ */
+        & .card-footer p{
+            font-size: 14px;
+            margin-bottom: 12px;
+
+        }
+
+        /* Phần dự báo */
+        & .forecast-item{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Chia làm 3 cột */
+            place-items: center;
+            margin-bottom: 15px;
+            & .icon-wrapper{
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+    /*-----Thông tin thời tiết cột bên phải-----*/
+    & .weather-right{
+        grid-column: span 3;
+        & h2{
+            margin-bottom: 10px;
+        }
+        & .highlights/* Phần Highlights */{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Chia làm 4 cột */
+            column-gap: 15px; /* Khoảng cách giữa các cột */
+
+            & .card:nth-of-type(1), /* Các thẻ đặc biệt */
+            & .card:nth-of-type(2){ /* Các thẻ đặc biệt */
+                grid-column: span 2; /* Các thẻ đầu chiếm 2 cột */
+            }
+
+            & .card-head /* Chỉ số chất lượng không khí (AQI) */ {
+                display: flex;
+                justify-content: space-between; /* Khoảng cách giữa tiêu đề và chỉ số AQI */
+                margin-bottom: 10px;  
+                & .air-index{
+                    color: #000;
+                    padding: 5px 10px;
+                    border-radius: 15px;
+
+                    /* AQI màu sắc theo mức độ */
+                    &.aqi-1{
+                        background-color: var(--aqi-1);
+                    }
+                    &.aqi-2{
+                        background-color: var(--aqi-2);
+                    }
+                    &.aqi-3{
+                        background-color: var(--aqi-3);
+                    }
+                    &.aqi-4{
+                        background-color: var(--aqi-4);
+                    }
+                    &.aqi-5{
+                        background-color: var(--aqi-5);
+                    }
+
+                }
+            }
+            & .air-indices /* Chỉ số không khí */ {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr); /* Chia 4 cột */
+                place-items: center;
+                & p{
+                    text-align: center;
+                }
+            }
+            & .sunrise-sunset /* Phần mặt trời mọc/lặn */ {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* Chia làm 2 cột */
+                & .item{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    & h2{
+                        margin-top: 15px;
+                    }
+                }
+            }
+            & .card-item{
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+        & .hourly-forecast /* Dự báo theo giờ */ {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr); /* Chia làm 8 cột */
+            column-gap: 10px; /* Khoảng cách giữa các cột */
+            & .card{
+                text-align: center;
+            }
+        }
+    }
+
+}
+@media(max-width: 1100px) /*--Màn hình nhỏ hơn hoặc bằng 1100px--*/{
+    .weather-data{
+        grid-template-columns: repeat(3, 1fr); /* Chia lưới thành 3 cột */
+
+        & .weather-right /* Phần bên phải */{
+            grid-column: span 2; /* Phần này chiếm 2 cột */
+
+            & .highlights /* Highlights */{
+                grid-template-columns: repeat(3, 1fr); /* Chia lưới thành 3 cột */
+
+                & .card:nth-of-type(1) /* Thẻ đầu tiên chiếm toàn bộ chiều ngang */{
+                    grid-column: span 3;
+                }
+            }
+            & .hourly-forecast /* Dự báo theo giờ: chia thành 6 cột */ {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+    }
+}
+@media(max-width: 1040px /*--Màn hình nhỏ hơn hoặc bằng 1040px--*/){
+    .weather-data{
+        grid-template-columns: repeat(2, 1fr); /* Chia lưới thành 2 cột */
+
+        & .weather-right /* Phần bên phải */{
+            grid-column: span 1; /* Chỉ chiếm 1 cột */
+
+            & .highlights /* Highlights */{
+                grid-template-columns: repeat(2, 1fr); /* Chia lưới thành 2 cột */
+                & .card:nth-of-type(1){
+                    grid-column: span 2;  /* Thẻ đầu tiên chiếm toàn bộ chiều ngang */
+                }
+            }
+
+            & .hourly-forecast /* Dự báo theo giờ: chia thành 4 cột */ {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+    }
+}
+@media(max-width: 992px)/*Màn hình nhỏ hơn hoặc bằng 992px*/{
+    .weather-data .weather-right .highlights /* Highlights trong phần bên phải */{
+        & .card{
+            grid-column: span 2; /* Các thẻ trong Highlights chiếm 2 cột */
+        }
+        & .air-indices{
+            grid-template-columns: repeat(3, 1fr);  /* Chỉ số không khí chia thành 3 cột */
+        }
+    }
+}
+@media(max-width: 850px)/*--Màn hình nhỏ hơn hoặc bằng 850px--*/{
+    .weather-data{
+        grid-template-columns: 1fr; /* Tất cả các thành phần xếp thành 1 cột */
+
+        & .weather-right .highlights /* Highlights trong phần bên phải */ {
+
+            /* Các thẻ từ thứ 3 đến thứ 7 chiếm toàn bộ chiều ngang */
+            & .card:nth-of-type(3),
+            & .card:nth-of-type(4),
+            & .card:nth-of-type(5),
+            & .card:nth-of-type(6),
+            & .card:nth-of-type(7){
+                grid-column: span 1;
+            }
+
+            & .air-indices /* Chỉ số không khí chia thành 5 cột */{
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+    }
+}
+@media(max-width: 660px)/*--Màn hình nhỏ hơn hoặc bằng 660px--*/{
+    .header{
+        flex-direction: column; /* Chuyển header thành dạng cột */
+
+        /* Tiêu đề header */
+        & h2{
+            margin-bottom: 8px;
+        }
+        & #city_input, #searchBtn, #locationBtn /* Input và các nút */ {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+    }
+}
+@media(max-width: 580px)/*--Màn hình nhỏ hơn hoặc bằng 580px--*/{
+    .weather-data .weather-right .highlights .air-indices{
+        grid-template-columns: repeat(4, 1fr); /* Chia thành 4 cột */
+    }
+}
+@media(max-width: 520px)/*--Màn hình nhỏ hơn hoặc bằng 520px--*/{
+    .weather-data .weather-right .highlights{
+
+        /* Các thẻ từ thứ 3 đến thứ 7 chỉ chiếm 1 cột */
+        & .card:nth-of-type(3),
+        & .card:nth-of-type(4),
+        & .card:nth-of-type(5),
+        & .card:nth-of-type(6),
+        & .card:nth-of-type(7){
+            grid-column: span 1;
+        }
+
+        & .air-indices /* Chỉ số không khí chia thành 3 cột */ {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+@media(max-width: 480px)/*Màn hình nhỏ hơn hoặc bằng 480px*/{
+     /* Phần mặt trời mọc/lặn trong Highlights */
+    .weather-data .weather-right .highlights .sunrise-sunset{
+        grid-template-columns: 1fr; /* Chuyển về dạng 1 cột */
+    }
+}
+@media(max-width: 450px)/*Màn hình nhỏ hơn hoặc bằng 450px*/{
+    /* Dự báo theo giờ */
+    .weather-data .weather-right .hourly-forecast{
+        grid-template-columns: repeat(3, 1fr); /* Chia thành 3 cột */
+    }
+}
+@media(max-width: 380px)/*Màn hình nhỏ hơn hoặc bằng 380px*/{
+     /* Chỉ số không khí trong Highlights */
+    .weather-data .weather-right .highlights .air-indices{
+        grid-template-columns: repeat(2, 1fr); /* Chia thành 2 cột */
+    }
+}
+
+:root {
+    --bg-color1: #212529; /* màu nền tối */
+    --bg-color2: #2a2b2d; /* màu nền tối thứ 2 */
+    --text-color: #fff; /* chữ màu trắng cho dark mode */
+    --text-color-light: #000; /* chữ màu đen cho light mode */
+
+    /* màu sắc cho AQI */
+    --aqi-1: #d4e157;
+    --aqi-2: #ffee58;    
+    --aqi-3: #ffca28;
+    --aqi-4: #ff7043;
+    --aqi-5: #ef5350;
+
+    /* Màu nền sáng */
+    --bg-light: #ffffff;
+    --bg-light-secondary: #f4f4f4;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-color1);
+    color: var(--text-color);
+    font-family: sans-serif;
+    padding: 0 15px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Chế độ sáng */
+body.light-mode {
+    background-color: var(--bg-light);
+    color: var(--text-color-light);
+}
+
+/* Thêm style cho các phần khác nếu cần thiết */
+.card {
+    background-color: var(--bg-color2);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+body.light-mode .card {
+    background-color: var(--bg-light-secondary);
+}
+
+/* Cải tiến nút chuyển chế độ sáng/tối */
+.theme-toggle-btn {
+    background-color: transparent;
+    border: 2px solid var(--text-color);
+    color: var(--text-color);
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--text-color);
+    color: var(--bg-color1);
+}
+
+.theme-toggle-btn .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+/* Thêm icon cho chế độ sáng/tối */
+body.light-mode .theme-toggle-btn .icon {
+    background-color: #f1c40f; /* Màu vàng cho chế độ sáng */
+}
+
+body.dark-mode .theme-toggle-btn .icon {
+    background-color: #34495e; /* Màu xám cho chế độ tối */
+}
+/* Cơ bản cho cả chế độ sáng và tối */
+body {
+    font-family: Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Chế độ sáng */
+body.light-mode {
+    background-color: #fff;
+    color: #333;
+}
+body.light-mode .header{
+    background-color: #fff;
+}
+body .light-mode .header h2 {
+    color: #121212; /* Màu chữ tối cho phần tiêu đề "Weather" */
+}
+
+/* Chế độ tối */
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
+
+body .dark-mode .header{
+    background-color: #121212
+}
+
+body .dark-mode .header h2 {
+    color: #ffffff; /* Màu chữ sáng cho phần tiêu đề "Weather" */
+}
+
+/* Các phần tử khác đã đề cập ở trên */
+body.light-mode .weather-left .current-weather p,
+body.light-mode .weather-left .current-weather h2,
+body.light-mode .weather-left .current-weather div p {
+    color: #333;
+}
+
+body.dark-mode .weather-left .current-weather p,
+body.dark-mode .weather-left .current-weather h2,
+body.dark-mode .weather-left .current-weather div p {
+    color: #fff;
+}
+
+.theme-toggle-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.theme-toggle-btn:hover {
+    background-color: #555;
+}
+
+
